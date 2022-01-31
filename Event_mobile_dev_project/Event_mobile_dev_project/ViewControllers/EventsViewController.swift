@@ -16,7 +16,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        events = [Event(title : "event", type : "type", location:"location", speaker:"speaker", start_time:"10h20", finish_time:"11h20", notes : "Blablabla, this is a note", topic : "topic", day: "15 novembre")]
+        events = [Event(title : "event", type : "type", location:"location", speaker:"speaker", start_time:"10h20", finish_time:"11h20", notes : "Blablabla, this is a note", topic : "topic", day: "15 novembre"), Event(title : "event", type : "type", location:"location", speaker:"speaker", start_time:"10h20", finish_time:"11h20", notes : "Blablabla, this is a note", topic : "topic", day: "15 novembre")]
         
         self.title = "Event"
         self.dayLabel.text = events[0].day
@@ -40,4 +40,10 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         return 80
     }
     
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let senderCell = sender as? EventCell,
+           let controller: DetailViewController = segue.destination as? DetailViewController {
+            controller.event = senderCell.event
+        }
+    }
 }
