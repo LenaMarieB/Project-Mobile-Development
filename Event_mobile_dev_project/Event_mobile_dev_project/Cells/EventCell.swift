@@ -26,5 +26,6 @@ class EventCell: UITableViewCell {
         self.typeLabel.textColor = ColorType(type : event.type);
 
         self.typeLabel.layer.borderColor = UIColor.darkGray
+        self.typeLabel.backgroundColor = UIColor.black
     }
 }
