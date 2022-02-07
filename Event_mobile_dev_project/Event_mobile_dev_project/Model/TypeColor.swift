@@ -1,8 +1,8 @@
 import Foundation
 import UIKit
 
-enum Type {
-    case Meal, Keynote, Panel, Workshop, Networking, Breakout_session
+enum Type : String {
+    case Meal, Keynote, Panel, Workshop, Networking, Breakout_session, None
 }
 
 func ColorType(type : Type) -> UIColor {
@@ -19,6 +19,26 @@ func ColorType(type : Type) -> UIColor {
             return UIColor.green
     case .Breakout_session :
             return UIColor.purple
+    case .None:
+        return UIColor.black
     }
 
 }
+
+func StringToType(text: String) -> Type {
+    switch text {
+    case "Meal" :
+        return .Meal
+    case "Keynote" :
+        return .Keynote
+    case "Panel" :
+        return .Panel
+    case "Workshop" :
+        return .Workshop
+    case "Networking" :
+        return .Networking
+    case "Breakout session" :
+        return .Breakout_session
+    default:
+        return .None
+    }}

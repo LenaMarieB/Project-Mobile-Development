@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 class Event {
     var title: String;
     var type: Type;
