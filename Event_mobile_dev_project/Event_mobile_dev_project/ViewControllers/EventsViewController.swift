@@ -20,10 +20,18 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.title = "Event"
         self.dayLabel.text = events[0].day
+        print(createGETRequest(parameter: ""))
+        getEvents(for: "", callback: { (success, eventsList, message) in
+            if success, let eventsList = eventsList {
+                print(eventsList)
+            }
+            else {
+                print("An error occured")
+        } })
+              
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(events.count)
         return events.count
     }
     
