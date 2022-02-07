@@ -2,7 +2,7 @@
 //  Event_mobile_dev_projectTests.swift
 //  Event_mobile_dev_projectTests
 //
-//  Created by Antoine Montes on 31/01/2022.
+//  Created by Camille Omnes on 31/01/2022.
 //
 
 import XCTest
