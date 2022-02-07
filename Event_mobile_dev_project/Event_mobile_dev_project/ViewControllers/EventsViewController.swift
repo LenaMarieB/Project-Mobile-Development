@@ -27,12 +27,14 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
              errorHandle.errorMessage {
                 print(errorMessage)
             }
-            else if let list = eventList, let event = list.last {
-                print(event.fields)
+            else if let eventList : [Event] = eventList {
+                self.events = eventList
+                print(eventList)
             }
             else {
                 print("Not working")
         } }
+        print(self.events)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
