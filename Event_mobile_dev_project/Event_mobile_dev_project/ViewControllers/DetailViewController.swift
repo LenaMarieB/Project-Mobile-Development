@@ -30,7 +30,8 @@ class DetailViewController: UIViewController {
             self.locationLabel.text = event.location
             self.notesLabel.text = event.notes
         }
-    }
+        
+        }
 
 
 }

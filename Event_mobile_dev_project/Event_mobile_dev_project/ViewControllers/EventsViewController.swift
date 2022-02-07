@@ -21,7 +21,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.title = "Event"
         self.dayLabel.text = events[0].day
-    }
+            }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
