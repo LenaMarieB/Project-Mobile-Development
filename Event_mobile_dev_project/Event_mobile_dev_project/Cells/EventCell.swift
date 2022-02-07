@@ -25,7 +25,10 @@ class EventCell: UITableViewCell {
         self.timeLabel.textColor = UIColor.init(red: 1, green: 0.647, blue: 0, alpha: 1);
         self.typeLabel.textColor = UIColor.white;
 
-        self.typeLabel.backgroundColor = ColorType(type : event.type)
-        self.typeLabel.layer.cornerRadius = 8
+        self.typeLabel.backgroundColor = ColorType(type : event.type);
+        self.typeLabel.layer.cornerRadius = 8;
+        self.typeLabel.layer.borderWidth = 2;
+        self.typeLabel.layer.borderColor = ColorType(type: event.type).cgColor;
+        self.typeLabel.layer.masksToBounds = true;
     }
 }
