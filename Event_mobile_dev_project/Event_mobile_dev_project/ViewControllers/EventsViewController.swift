@@ -15,12 +15,9 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        //let t = Type.Breakout_session
         // Do any additional setup after loading the view.
-        /*events = [Event(title : "event", type : t, location:"location", speaker:"speaker", start_time:"10h20", finish_time:"11h20", notes : "Blablabla, this is a note", topic : "topic", day: "15 novembre"), Event(title : "event", type : t, location:"location", speaker:"speaker", start_time:"10h20", finish_time:"11h20", notes : "Blablabla, this is a note", topic : "topic", day: "15 novembre")]*/
         
-        self.title = "Event"
-        //self.dayLabel.text = events[0].end
+        self.title = "Schedules"
         let requestFactory = RequestFactory()
         requestFactory.getEventList { (errorHandle, eventList) in
             if let _ = errorHandle.errorType, let errorMessage =
@@ -34,7 +31,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             else {
                 print("Not working")
         } }
-        print(self.events)
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {

@@ -148,3 +148,7 @@ class RequestFactory: RequestFactoryProtocol {
 
 }
 
+func dateToString(iso: String) -> NSDate {
+    let formatter = DateFormatter()
+    return formatter.date(from: iso)! as NSDate
+}
