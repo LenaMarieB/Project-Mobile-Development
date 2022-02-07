@@ -30,6 +30,14 @@ class DetailViewController: UIViewController {
             self.locationLabel.text = event.location
             self.notesLabel.text = event.notes
         }
+            self.topicLabel.textColor = UIColor.init(red: 0.820, green: 0.306, blue: 0.008, alpha: 1);
+            self.titleLabel.textColor = UIColor.init(red: 0.749, green: 0.235, blue: 0.122, alpha: 1);
+            self.startLabel.textColor = UIColor.init(red: 0.820, green: 0.306, blue: 0.008, alpha: 1);
+            self.speakerLabel.textColor = UIColor.init(red: 0.820, green: 0.306, blue: 0.008, alpha: 1);
+            self.finishLabel.textColor = UIColor.init(red: 0.820, green: 0.306, blue: 0.008, alpha: 1);
+            self.locationLabel.textColor = UIColor.init(red: 0.820, green: 0.306, blue: 0.008, alpha: 1);
+            self.notesLabel.textColor = UIColor.init(red: 0.820, green: 0.306, blue: 0.008, alpha: 1);
+
         
         }
 
