@@ -30,5 +30,7 @@ class EventCell: UITableViewCell {
         self.typeLabel.layer.borderWidth = 2;
         self.typeLabel.layer.borderColor = ColorType(type: event.type).cgColor;
         self.typeLabel.layer.masksToBounds = true;
+
+        self.view.backgroundColor = UIColor.UIColor.init(red: 0.976, green: 0.882, blue: 0.863, alpha: 1);
     }
 }
