@@ -84,41 +84,62 @@ enum CustomError: Error {
     case parsingError
 }
 
-func createGETRequest(parameter: String) -> URLRequest {
-    let stringUrl = "https://api.airtable.com/v0/appXKn0DvuHuLw4DV/Schedule?api_key=keyinNaJ80FXASznv"
-     + parameter
-    let url = URL(string: stringUrl)
-    var request = URLRequest(url: url!)
-    request.httpMethod = "GET"
-    request.timeoutInterval = 100
-    return request
+// Request Factory
+protocol RequestFactoryProtocol {
+    func createRequest(urlStr: String, requestType: RequestType, params:
+[String]?) -> URLRequest
+    func getEventList(callback: @escaping ((errorType: CustomError?,
+     errorMessage: String?), [Event]?) -> Void)
 }
 
-func getEvents(for keyword: String, callback: @escaping (Bool,
- Event?, String?) -> Void) {
-    let session = URLSession(configuration: .default)
-    let request = createGETRequest(parameter: keyword)
-    let task = session.dataTask(with: request) { (data, response, error) in
-        if error == nil, let data = data {
-            if let responseHttp = response as? HTTPURLResponse,
-             responseHttp.statusCode == 200 {
-                if let responseHttp = response as? HTTPURLResponse,
-                             responseHttp.statusCode == 200 {
-                                if let result = try? JSONDecoder().decode(Response.self,
-                                 from: data) {
-                                    callback(true, result.records, nil)
-                }
-                else {
-                                    callback(false, nil, "Parsing error")
-                                }
-                }}
-else {
-                callback(false, nil, "Status code error")
+private let eventUrlStr =
+ "https://api.airtable.com/v0/appXKn0DvuHuLw4DV/Schedule?"
+
+class RequestFactory: RequestFactoryProtocol {
+    internal func createRequest(urlStr: String, requestType: RequestType,
+     params: [String]?) -> URLRequest {
+        var url: URL = URL(string: urlStr)!
+        if let params = params {
+            var urlParams = urlStr
+            for param in params {
+                urlParams = urlParams + "/" + param
             }
-}
-else {
-            callback(false, nil, error?.localizedDescription)
+            print(urlParams)
+            url = URL(string: urlParams)!
         }
+        var request = URLRequest(url: url)
+        request.timeoutInterval = 100
+        request.httpMethod = requestType.rawValue
+        let accessToken = "keyinNaJ80FXASznv"
+        request.setValue("Bearer \(accessToken)", forHTTPHeaderField:
+         "Authorization")
+        return request
     }
-    task.resume()
+    
+    func getEventList(callback: @escaping ((errorType: CustomError?,
+     errorMessage: String?), [Event]?) -> Void) {
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: createRequest(urlStr: eventUrlStr, requestType: .get, params: nil)) {(data, response, error) in if let data = data, error == nil {
+            if let responseHttp = response as? HTTPURLResponse {
+                if responseHttp.statusCode == 200 {
+                    if let response = try?
+                     JSONDecoder().decode(Records.self, from: data) {
+                        callback((nil, nil), response.records)
+        }
+        else {
+                        callback((CustomError.parsingError, "parsing error"), nil)
+        } }
+        else {
+                            callback((CustomError.statusCodeError, "status code : \(responseHttp.statusCode)"), nil)
+                        }
+        } }
+                else {
+                    callback((CustomError.requestError,
+                     error.debugDescription), nil)
+                }
+        }
+            task.resume()
+        }
+
 }
+

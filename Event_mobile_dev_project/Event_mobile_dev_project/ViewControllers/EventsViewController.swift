@@ -21,12 +21,19 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         
         self.title = "Event"
         //self.dayLabel.text = events[0].end
-        getEvents(for: "") { (success, eventsList, message) in
-            if success, let eventsList = eventsList {
-        print(eventsList)}
+        let requestFactory = RequestFactory()
+        requestFactory.getEventList { (errorHandle, eventList) in
+            if let _ = errorHandle.errorType, let errorMessage =
+             errorHandle.errorMessage {
+                print(errorMessage)
+            }
+            else if let list = eventList, let event = list.last {
+                print(event.id)
+            }
             else {
-                print(message ?? "An error occured")
-        } }    }
+                print("Not working")
+        } }
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return events.count
