@@ -5,19 +5,20 @@ enum Type {
     case Meal, Keynote, Panel, Workshop, Networking, Breakout_session
 }
 
-func ColorType(type : Type){
-    case Meal :
-        return UIColor.yellowColor()
-    case Keynote :
-        return UIColor.redColor()
-    case Panel :
-        return UIColor.blueColor()
-    case Workshop :
-        return UIColor.pinkColor()
-    case Networking :
-        return UIColor.greenColor()
-    case Breakout_session :
-        return UIColor.purpleColor()
-
+func ColorType(type : Type) -> UIColor {
+    switch type {
+    case .Meal :
+            return UIColor.yellow
+    case .Keynote :
+            return UIColor.red
+    case .Panel :
+            return UIColor.blue
+    case .Workshop :
+            return UIColor.white
+    case .Networking :
+            return UIColor.green
+    case .Breakout_session :
+            return UIColor.purple
+    }
 
 }

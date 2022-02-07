@@ -7,9 +7,9 @@
 
 import Foundation
 
-class Event : Codable {
+class Event {
     var title: String;
-    var type: String; //enumeration ?
+    var type: Type;
     var location: String; //class Location
     var speaker: String; //class Speaker
     var start_time: String;
@@ -18,7 +18,7 @@ class Event : Codable {
     var topic: String;
     var day: String;
     
-    init(title : String, type : String, location:String, speaker:String, start_time:String, finish_time:String, notes : String, topic : String, day:String) {
+    init(title : String, type : Type, location:String, speaker:String, start_time:String, finish_time:String, notes : String, topic : String, day:String) {
         self.title = title;
         self.type = type;
         self.location = location;
@@ -31,6 +31,7 @@ class Event : Codable {
     }
     
 }
+
 /*
 struct Event: Codable {
     let id: String
@@ -40,8 +41,8 @@ struct Event: Codable {
 struct Fields: Codable {
     let Notes: String
     let Activity: String
-    let End :
-    let Start :
+    let End : String
+    let Start : String
     let Location : [String]
     enum Type: String, CodingKey {
         case name = "Name"

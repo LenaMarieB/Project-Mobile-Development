@@ -19,6 +19,7 @@
 		BB68606827A82A620003B942 /* EventsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB68606727A82A620003B942 /* EventsViewController.swift */; };
 		BB68606B27A82AED0003B942 /* Event.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB68606A27A82AED0003B942 /* Event.swift */; };
 		BB68606E27A836CF0003B942 /* EventCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BB68606D27A836CF0003B942 /* EventCell.swift */; };
+		BBC8436627B15D9E00E71FEA /* TypeColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBC8436527B15D9E00E71FEA /* TypeColor.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -55,6 +56,7 @@
 		BB68606727A82A620003B942 /* EventsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventsViewController.swift; sourceTree = "<group>"; };
 		BB68606A27A82AED0003B942 /* Event.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Event.swift; sourceTree = "<group>"; };
 		BB68606D27A836CF0003B942 /* EventCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EventCell.swift; sourceTree = "<group>"; };
+		BBC8436527B15D9E00E71FEA /* TypeColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TypeColor.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -147,6 +149,7 @@
 		BB68606927A82AD60003B942 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				BBC8436527B15D9E00E71FEA /* TypeColor.swift */,
 				BB68606A27A82AED0003B942 /* Event.swift */,
 			);
 			path = Model;
@@ -294,6 +297,7 @@
 				BB68603B27A81E400003B942 /* DetailViewController.swift in Sources */,
 				BB68606827A82A620003B942 /* EventsViewController.swift in Sources */,
 				BB68603727A81E400003B942 /* AppDelegate.swift in Sources */,
+				BBC8436627B15D9E00E71FEA /* TypeColor.swift in Sources */,
 				BB68603927A81E400003B942 /* SceneDelegate.swift in Sources */,
 				BB68606E27A836CF0003B942 /* EventCell.swift in Sources */,
 				BB68606B27A82AED0003B942 /* Event.swift in Sources */,

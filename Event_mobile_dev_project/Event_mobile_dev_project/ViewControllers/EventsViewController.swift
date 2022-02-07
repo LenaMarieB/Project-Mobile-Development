@@ -15,20 +15,12 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        let t = Type.Breakout_session
         // Do any additional setup after loading the view.
-        events = [Event(title : "event", type : "type", location:"location", speaker:"speaker", start_time:"10h20", finish_time:"11h20", notes : "Blablabla, this is a note", topic : "topic", day: "15 novembre"), Event(title : "event", type : "type", location:"location", speaker:"speaker", start_time:"10h20", finish_time:"11h20", notes : "Blablabla, this is a note", topic : "topic", day: "15 novembre")]
+        events = [Event(title : "event", type : t, location:"location", speaker:"speaker", start_time:"10h20", finish_time:"11h20", notes : "Blablabla, this is a note", topic : "topic", day: "15 novembre"), Event(title : "event", type : t, location:"location", speaker:"speaker", start_time:"10h20", finish_time:"11h20", notes : "Blablabla, this is a note", topic : "topic", day: "15 novembre")]
         
         self.title = "Event"
         self.dayLabel.text = events[0].day
-        print(createGETRequest(parameter: ""))
-        getEvents(for: "", callback: { (success, eventsList, message) in
-            if success, let eventsList = eventsList {
-                print(eventsList)
-            }
-            else {
-                print("An error occured")
-        } })
-              
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
