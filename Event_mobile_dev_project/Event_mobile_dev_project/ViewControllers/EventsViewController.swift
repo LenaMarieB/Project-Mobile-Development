@@ -28,7 +28,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 print(errorMessage)
             }
             else if let list = eventList, let event = list.last {
-                print(event.id)
+                print(event.fields)
             }
             else {
                 print("Not working")

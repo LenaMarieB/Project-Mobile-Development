@@ -41,17 +41,22 @@ struct Event: Codable {
 }
 
 struct Fields: Codable {
-    let notes: String
-    let activity: String
-    let end : String
-    let start : String
-    let location : [String]
+    let notes: String?
+    let activity: String?
+    let end : String?
+    let start : String?
+    let location : [String]?
+    let topic : [String]?
+    let speakers : [String]?
+    
     enum CodingKeys: String, CodingKey {
         case notes = "Notes"
-        case end = "End"
         case activity = "Activity"
+        case end = "End"
         case start = "Start"
         case location = "Location"
+        case topic = "Topic / theme"
+        case speakers = "Speaker(s)"
     }
  }
 
