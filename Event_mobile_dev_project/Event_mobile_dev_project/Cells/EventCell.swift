@@ -22,14 +22,17 @@ class EventCell: UITableViewCell {
         self.typeLabel.text = event.type.rawValue;
 
         self.eventLabel.textColor = UIColor.init(red: 0.749, green: 0.235, blue: 0.122, alpha: 1);
-        self.timeLabel.textColor = UIColor.init(red: 1, green: 0.647, blue: 0, alpha: 1);
+        self.timeLabel.textColor = UIColor.black;
         self.typeLabel.textColor = UIColor.white;
+
+        self.timelabel.font = UIFont.boldSystemFont(ofSize: 16.0);
 
         self.typeLabel.backgroundColor = ColorType(type : event.type);
         self.typeLabel.layer.cornerRadius = 8;
         self.typeLabel.layer.borderWidth = 2;
         self.typeLabel.layer.borderColor = ColorType(type: event.type).cgColor;
         self.typeLabel.layer.masksToBounds = true;
-        
-        self.backgroundColor = UIColor.init(red: 0.976, green: 0.882, blue: 0.863, alpha: 1);    }
+
+        self.backgroundColor = UIColor.init(red: 0.976, green: 0.882, blue: 0.863, alpha: 1);
+    }
 }
