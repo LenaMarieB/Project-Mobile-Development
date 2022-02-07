@@ -7,7 +7,7 @@
 
 import Foundation
 
-
+/*
 class Event {
     var title: String;
     var type: Type;
@@ -33,28 +33,55 @@ class Event {
     
 }
 
-/*
+*/
+
 struct Event: Codable {
     let id: String
     let fields: Fields
 }
 
 struct Fields: Codable {
-    let Notes: String
-    let Activity: String
-    let End : String
-    let Start : String
-    let Location : [String]
-    enum Type: String, CodingKey {
-        case name = "Name"
-        case type = "Type"
-        case images = "Images"
+    let notes: String
+    let activity: String
+    let end : String
+    let start : String
+    let location : [String]
+    enum CodingKeys: String, CodingKey {
+        case notes = "Notes"
+        case end = "End"
+        case activity = "Activity"
+        case start = "Start"
+        case location = "Location"
     }
- 
  }
 
+struct Records: Codable {
+    var records: [Event]?
+}
+
+struct FurnitureImage: Codable {
+    let url: String
+}
+
 struct Response: Codable {
-    var records: [Event]
+    let id: String
+    let deleted: Bool
+}
+
+struct ErrorResponse: Codable {
+    let error: String
+}
+
+enum RequestType: String {
+    case get = "GET"
+    case post = "POST"
+    case delete = "DELETE"
+}
+
+enum CustomError: Error {
+    case requestError
+    case statusCodeError
+    case parsingError
 }
 
 func createGETRequest(parameter: String) -> URLRequest {
@@ -67,8 +94,8 @@ func createGETRequest(parameter: String) -> URLRequest {
     return request
 }
 
-func getEvents(for keyword: String, callback: @escaping (Bool, [Event]?,
- String?) -> Void) {
+func getEvents(for keyword: String, callback: @escaping (Bool,
+ Event?, String?) -> Void) {
     let session = URLSession(configuration: .default)
     let request = createGETRequest(parameter: keyword)
     let task = session.dataTask(with: request) { (data, response, error) in
@@ -79,7 +106,7 @@ func getEvents(for keyword: String, callback: @escaping (Bool, [Event]?,
                              responseHttp.statusCode == 200 {
                                 if let result = try? JSONDecoder().decode(Response.self,
                                  from: data) {
-                                    callback(true, result.events, nil)
+                                    callback(true, result.records, nil)
                 }
                 else {
                                     callback(false, nil, "Parsing error")
@@ -95,4 +122,3 @@ else {
     }
     task.resume()
 }
-*/

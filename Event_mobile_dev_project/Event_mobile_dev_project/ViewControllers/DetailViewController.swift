@@ -21,7 +21,7 @@ class DetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
-        if let event = event {
+        /*if let event = event {
             self.topicLabel.text = event.topic
             self.titleLabel.text = event.title
             self.startLabel.text = event.start_time
@@ -29,7 +29,7 @@ class DetailViewController: UIViewController {
             self.finishLabel.text = event.finish_time
             self.locationLabel.text = event.location
             self.notesLabel.text = event.notes
-        }
+        }*/
     }
 
 
