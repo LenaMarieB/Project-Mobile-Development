@@ -38,7 +38,7 @@ class DetailViewController: UIViewController {
             self.locationLabel.textColor = UIColor.init(red: 0.820, green: 0.306, blue: 0.008, alpha: 1);
             self.notesLabel.textColor = UIColor.init(red: 0.820, green: 0.306, blue: 0.008, alpha: 1);
 
-            self.titlelabel.font = UIFont.boldSystemFont(ofSize: 16.0);
+            self.titleLabel.font = UIFont.boldSystemFont(ofSize: 20.0);
 
 
         self.view.backgroundColor = UIColor.init(red: 0.976, green: 0.882, blue: 0.863, alpha: 1);

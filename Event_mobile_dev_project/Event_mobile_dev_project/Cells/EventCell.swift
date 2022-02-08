@@ -25,7 +25,7 @@ class EventCell: UITableViewCell {
         self.timeLabel.textColor = UIColor.black;
         self.typeLabel.textColor = UIColor.white;
 
-        self.timelabel.font = UIFont.boldSystemFont(ofSize: 16.0);
+        self.timeLabel.font = UIFont.boldSystemFont(ofSize: 16.0);
 
         self.typeLabel.backgroundColor = ColorType(type : event.type);
         self.typeLabel.layer.cornerRadius = 8;
