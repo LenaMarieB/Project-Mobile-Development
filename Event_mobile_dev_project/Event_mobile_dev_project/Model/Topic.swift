@@ -1,42 +1,34 @@
 //
-//  Event.swift
+//  Topic.swift
 //  Event_mobile_dev_project
 //
-//  Created by Camille Omnes on 31/01/2022.
+//  Created by Camille Omnes on 14/02/2022.
 //
 
 import Foundation
 
-struct Event: Codable {
+struct Topic: Codable {
     let id: String
-    let fields: Fields
+    let fields: FieldsTopic
 }
 
-struct Fields: Codable {
-    let notes: String?
-    let activity: String?
-    let end : String?
-    let start : String?
-    let location : [String]?
-    let topic : [String]?
-    let speakers : [String]?
+struct FieldsTopic: Codable {
+    let events: [String]?
+    let topic: String?
+    let count : String?
     
     enum CodingKeys: String, CodingKey {
-        case notes = "Notes"
-        case activity = "Activity"
-        case end = "End"
-        case start = "Start"
-        case location = "Location"
+        case events = "Relevant event(s)"
         case topic = "Topic / theme"
-        case speakers = "Speaker(s)"
+        case count = "Count"
     }
  }
 
-struct Records: Codable {
-    var records: [Event]?
+struct RecordsTopic: Codable {
+    var records: [Topic]?
 }
 
-
+/*
 struct Response: Codable {
     let id: String
     let deleted: Bool
@@ -116,4 +108,4 @@ class RequestFactory: RequestFactoryProtocol {
             task.resume()
         }
 
-}
+}*/

@@ -14,26 +14,43 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
-        super.viewDidLoad()
-        let t = Type.Breakout_session
         // Do any additional setup after loading the view.
-        events = [Event(title : "event", type : t, location:"location", speaker:"speaker", start_time:"10h20", finish_time:"11h20", notes : "Blablabla, this is a note", topic : "topic", day: "15 novembre"), Event(title : "event", type : t, location:"location", speaker:"speaker", start_time:"10h20", finish_time:"11h20", notes : "Blablabla, this is a note", topic : "topic", day: "15 novembre")]
-        
-        self.title = "Event"
-        self.dayLabel.text = events[0].day
-            }
+        super.viewDidLoad();
+        self.title = "Schedules";
+        self.loadEvents();
+    }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        print(events.count)
         return events.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell: EventCell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventCell
         let event = events[indexPath.row]
         
         cell.setUpCell(event: event)
         
         return cell
+    }
+    
+    func loadEvents(){
+        let requestFactory = RequestFactory()
+        requestFactory.getEventList { (errorHandle, eventList) in
+            if let _ = errorHandle.errorType, let errorMessage =
+             errorHandle.errorMessage {
+                print(errorMessage);
+            }
+            else if let eventList : [Event] = eventList {
+                self.events = eventList;
+                DispatchQueue.main.async {
+                    self.tableView?.reloadData()
+                }
+                print(self.events)
+            }
+            else {
+                print("Not working");
+        } }
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
