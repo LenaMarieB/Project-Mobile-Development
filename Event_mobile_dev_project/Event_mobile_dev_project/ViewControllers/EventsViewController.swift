@@ -23,18 +23,19 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        print(events.count)
         return events.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventCell
         let event = events[indexPath.row]
-        print(indexPath.row)
-        print(topics)
-        let topic = topics[indexPath.row]
-        
-        cell.setUpCell(event: event, topic: topic)
+        if topics.count > indexPath.row {
+            let topic = topics[indexPath.row]
+            cell.setUpCell(event: event, topic: topic)
+        }
+        else {
+            cell.setUpCell(event: event, topic: nil)
+        }
         
         return cell
     }
@@ -76,7 +77,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 DispatchQueue.main.async {
                     self.tableView?.reloadData()
                 }
-                print(self.topics)
             }
             else {
                 print("Cannot retrieve topic");

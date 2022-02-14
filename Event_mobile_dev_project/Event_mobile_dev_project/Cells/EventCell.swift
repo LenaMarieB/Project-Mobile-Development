@@ -18,7 +18,7 @@ class EventCell : UITableViewCell {
     //var speaker: Speaker?
     //var location: Location?
         
-    func setUpCell(event: Event, topic: Topic) {
+    func setUpCell(event: Event, topic: Topic?) {
         
         self.event = event
         self.topic = topic
