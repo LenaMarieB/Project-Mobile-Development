@@ -41,10 +41,10 @@ class EventCell : UITableViewCell {
         self.typeLabel.textColor = UIColor.white;
         self.timeLabel.font = UIFont.boldSystemFont(ofSize: 16.0);
 
-        self.typeLabel.backgroundColor = ColorType(type : event.type);
+        //self.typeLabel.backgroundColor = ColorType(type : event.fields.topic?.first);
         self.typeLabel.layer.cornerRadius = 8;
         self.typeLabel.layer.borderWidth = 2;
-        self.typeLabel.layer.borderColor = ColorType(type: event.type).cgColor;
+        //self.typeLabel.layer.borderColor = ColorType(type: event.fields.topic?.first).cgColor;
         self.typeLabel.layer.masksToBounds = true;
 
         self.backgroundColor = UIColor.init(red: 0.976, green: 0.882, blue: 0.863, alpha: 1);
