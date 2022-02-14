@@ -10,6 +10,8 @@ import Foundation
 
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var events : [Event] = [Event]();
+    var topics : [Topic] = [Topic]();
+    
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
 
@@ -28,8 +30,11 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "eventCell", for: indexPath) as! EventCell
         let event = events[indexPath.row]
+        print(indexPath.row)
+        print(topics)
+        let topic = topics[indexPath.row]
         
-        cell.setUpCell(event: event)
+        cell.setUpCell(event: event, topic: topic)
         
         return cell
     }
@@ -46,10 +51,35 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 DispatchQueue.main.async {
                     self.tableView?.reloadData()
                 }
-                print(self.events)
+                for event in self.events {
+                    if let topics = event.fields.topic {
+                        for t in topics {
+                            self.loadTopic(id: t)
+                        }
+                    }
+                }
             }
             else {
                 print("Not working");
+        } }
+    }
+    
+    func loadTopic(id: String){
+        let requestFactory = RequestFactory()
+        requestFactory.getTopic(id: id){ (errorHandle, topic) in
+            if let _ = errorHandle.errorType, let errorMessage =
+             errorHandle.errorMessage {
+                print(errorMessage);
+            }
+            else if let topic : Topic = topic {
+                self.topics.append(topic);
+                DispatchQueue.main.async {
+                    self.tableView?.reloadData()
+                }
+                print(self.topics)
+            }
+            else {
+                print("Cannot retrieve topic");
         } }
     }
     
@@ -61,6 +91,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         if let senderCell = sender as? EventCell,
            let controller: DetailViewController = segue.destination as? DetailViewController {
             controller.event = senderCell.event
+            controller.topic = senderCell.topic
         }
     }
 }

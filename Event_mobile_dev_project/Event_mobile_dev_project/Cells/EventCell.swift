@@ -14,10 +14,16 @@ class EventCell : UITableViewCell {
     @IBOutlet weak var typeLabel: UILabel!
     
     var event: Event?
+    var topic: Topic?
+    //var speaker: Speaker?
+    //var location: Location?
         
-    func setUpCell(event: Event) {
+    func setUpCell(event: Event, topic: Topic) {
         
         self.event = event
+        self.topic = topic
+        //self.speaker = speaker
+        //self.location = location
         
         self.eventLabel.text = event.fields.activity;
         
@@ -32,19 +38,21 @@ class EventCell : UITableViewCell {
             }
         }
         
-        if let topic = event.fields.topic {
-            self.typeLabel.text = StringToType(text: topic.first!).rawValue;
+        if let type = event.fields.type {
+            self.typeLabel.text = StringToType(text: type).rawValue;
         }
         
         self.eventLabel.textColor = UIColor.init(red: 0.749, green: 0.235, blue: 0.122, alpha: 1);
         self.timeLabel.textColor = UIColor.black;
         self.typeLabel.textColor = UIColor.white;
         self.timeLabel.font = UIFont.boldSystemFont(ofSize: 16.0);
-
-        //self.typeLabel.backgroundColor = ColorType(type : event.fields.topic?.first);
+        if let type = event.fields.type {
+        self.typeLabel.backgroundColor = ColorType(type : StringToType(text : type));
+            self.typeLabel.layer.borderColor = ColorType(type: StringToType(text : type)).cgColor;
+        }
         self.typeLabel.layer.cornerRadius = 8;
         self.typeLabel.layer.borderWidth = 2;
-        //self.typeLabel.layer.borderColor = ColorType(type: event.fields.topic?.first).cgColor;
+        
         self.typeLabel.layer.masksToBounds = true;
 
         self.backgroundColor = UIColor.init(red: 0.976, green: 0.882, blue: 0.863, alpha: 1);

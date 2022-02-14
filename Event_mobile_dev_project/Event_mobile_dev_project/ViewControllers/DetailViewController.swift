@@ -17,6 +17,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var notesLabel : UITextView!
     
     var event : Event?
+    var topic : Topic?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -24,7 +25,9 @@ class DetailViewController: UIViewController {
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
         if let event = event {
-            self.topicLabel.text = event.fields.topic?.first
+            if let t = topic?.fields.topic {
+                self.topicLabel.text = t
+            }
             self.titleLabel.text = event.fields.activity
             if let date = event.fields.start {
                 if let d = formatter.date(from: date) {
@@ -58,7 +61,6 @@ class DetailViewController: UIViewController {
         self.view.backgroundColor = UIColor.init(red: 0.976, green: 0.882, blue: 0.863, alpha: 1);
         self.notesLabel.backgroundColor = UIColor.init(red: 0.976, green: 0.882, blue: 0.863, alpha: 1);
         }
-
-
+    
 }
 

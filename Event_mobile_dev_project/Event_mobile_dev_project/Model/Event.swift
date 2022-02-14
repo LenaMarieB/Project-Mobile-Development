@@ -20,6 +20,7 @@ struct Fields: Codable {
     let location : [String]?
     let topic : [String]?
     let speakers : [String]?
+    let type: String?
     
     enum CodingKeys: String, CodingKey {
         case notes = "Notes"
@@ -29,6 +30,7 @@ struct Fields: Codable {
         case location = "Location"
         case topic = "Topic / theme"
         case speakers = "Speaker(s)"
+        case type = "Type"
     }
  }
 
@@ -70,6 +72,9 @@ protocol RequestFactoryProtocol {
 private let eventUrlStr =
  "https://api.airtable.com/v0/appXKn0DvuHuLw4DV/Schedule?"
 
+private let topicUrlStr =
+ "https://api.airtable.com/v0/appXKn0DvuHuLw4DV/Topics%20%26%20themes"
+
 class RequestFactory: RequestFactoryProtocol {
     internal func createRequest(urlStr: String, requestType: RequestType,
      params: [String]?) -> URLRequest {
@@ -79,7 +84,6 @@ class RequestFactory: RequestFactoryProtocol {
             for param in params {
                 urlParams = urlParams + "/" + param
             }
-            print(urlParams)
             url = URL(string: urlParams)!
         }
         var request = URLRequest(url: url)
@@ -90,6 +94,26 @@ class RequestFactory: RequestFactoryProtocol {
          "Authorization")
         return request
     }
+    
+    func getTopic(id : String,
+                  callback: @escaping ((errorType: CustomError?,
+                                        errorMessage: String?), Topic?) -> Void) {
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: createRequest(urlStr: topicUrlStr, requestType: .get, params: [id])) {(data, response, error) in if let data = data, error == nil {
+            if let responseHttp = response as? HTTPURLResponse {
+                  if responseHttp.statusCode == 200 {
+                      if let response = try? JSONDecoder().decode(Topic.self, from: data) { callback((nil, nil), response)}
+                        else {
+                            print(NSString(data: data, encoding: String.Encoding.utf8.rawValue));
+                            callback((CustomError.parsingError, "parsing error"), nil)
+                        } }
+                  else { callback((CustomError.statusCodeError, "status code : \(responseHttp.statusCode)"), nil)}
+                  } }
+                  else { callback((CustomError.requestError, error.debugDescription), nil)
+                  }}
+                  task.resume()
+        }
+
     
     func getEventList(callback: @escaping ((errorType: CustomError?,
      errorMessage: String?), [Event]?) -> Void) {
