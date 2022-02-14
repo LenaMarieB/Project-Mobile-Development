@@ -80,7 +80,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     }
                     if let locations = event.fields.location {
                         for l in locations {
-                            print(l)
                             self.loadLocation(id: l)
                         }
                     }
@@ -139,7 +138,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 DispatchQueue.main.async {
                     self.tableView?.reloadData()
                 }
-                print(self.locations)
             }
             else {
                 print("Cannot retrieve location");

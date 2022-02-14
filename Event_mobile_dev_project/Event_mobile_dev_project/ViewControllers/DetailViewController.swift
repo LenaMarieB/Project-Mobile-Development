@@ -15,7 +15,7 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var locationLabel : UILabel!
     @IBOutlet weak var speakerLabel : UILabel!
     @IBOutlet weak var notesLabel : UITextView!
-    //@IBOutlet weak var locationImage :
+    @IBOutlet weak var locationImage : UIImageView!
     
     var event : Event?
     var topic : Topic?
@@ -59,6 +59,21 @@ class DetailViewController: UIViewController {
                 self.locationLabel.text = spaceName
             }
         }
+        if let location = location {
+            if let urlImage = location.fields.photos?.first?.url {
+                let url = URL(string : urlImage)!
+                getData(from: url) { data, response, error in
+                        guard let data = data, error == nil else { return }
+                        print(response?.suggestedFilename ?? url.lastPathComponent)
+                        print("Download Finished")
+                        // always update the UI from the main thread
+                        DispatchQueue.main.async() { [weak self] in
+                            self?.locationImage.image = UIImage(data: data)
+                        }
+                }
+                print(urlImage)
+            }
+        }
             self.topicLabel.textColor = UIColor.init(red: 0.820, green: 0.306, blue: 0.008, alpha: 1);
             self.titleLabel.textColor = UIColor.init(red: 0.749, green: 0.235, blue: 0.122, alpha: 1);
             self.startLabel.textColor = UIColor.init(red: 0.820, green: 0.306, blue: 0.008, alpha: 1);
@@ -74,5 +89,8 @@ class DetailViewController: UIViewController {
         self.notesLabel.backgroundColor = UIColor.init(red: 0.976, green: 0.882, blue: 0.863, alpha: 1);
         }
     
+    func getData(from url: URL, completion: @escaping (Data?, URLResponse?, Error?) -> ()) {
+        URLSession.shared.dataTask(with: url, completionHandler: completion).resume()
+    }
 }
 

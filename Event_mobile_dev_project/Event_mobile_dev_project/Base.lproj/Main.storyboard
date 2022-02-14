@@ -108,6 +108,7 @@
                     <navigationItem key="navigationItem" id="dnC-bG-zvx"/>
                     <connections>
                         <outlet property="finishLabel" destination="yox-G7-h1s" id="QXo-hN-QVD"/>
+                        <outlet property="locationImage" destination="A6Q-Pd-SGE" id="yxo-AU-JB5"/>
                         <outlet property="locationLabel" destination="21F-om-PbC" id="aLE-gw-l7w"/>
                         <outlet property="notesLabel" destination="hBk-rM-GFu" id="XlN-BB-YZR"/>
                         <outlet property="speakerLabel" destination="B0K-Dm-tHo" id="Lo5-lS-aQH"/>
