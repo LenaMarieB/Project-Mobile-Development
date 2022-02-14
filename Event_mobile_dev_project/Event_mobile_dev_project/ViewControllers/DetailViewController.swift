@@ -15,10 +15,12 @@ class DetailViewController: UIViewController {
     @IBOutlet weak var locationLabel : UILabel!
     @IBOutlet weak var speakerLabel : UILabel!
     @IBOutlet weak var notesLabel : UITextView!
+    //@IBOutlet weak var locationImage :
     
     var event : Event?
     var topic : Topic?
     var speaker : Speaker?
+    var location : Location?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -44,12 +46,17 @@ class DetailViewController: UIViewController {
                     print("error while converting date")
                 }
             }
-            self.locationLabel.text = event.fields.location?.first
             self.notesLabel.text = event.fields.notes
         }
         if let speaker = speaker {
             if let speakerName = speaker.fields.name {
                 self.speakerLabel.text = speakerName
+            }
+        }
+        
+        if let location = location {
+            if let spaceName = location.fields.space {
+                self.locationLabel.text = spaceName
             }
         }
             self.topicLabel.textColor = UIColor.init(red: 0.820, green: 0.306, blue: 0.008, alpha: 1);

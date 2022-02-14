@@ -150,6 +150,7 @@ class RequestFactory: RequestFactoryProtocol {
                         callback((nil, nil), response)
         }
         else {
+                        print(id)
                         callback((CustomError.parsingError, "parsing error"), nil)
         } }
         else {

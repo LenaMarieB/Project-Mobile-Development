@@ -36,14 +36,20 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             let topic = topics[indexPath.row]
             if speakers.count > indexPath.row {
                 let s = speakers[indexPath.row]
-                cell.setUpCell(event: event, topic: topic, speaker: s)
+                if locations.count > indexPath.row {
+                    let l = locations[indexPath.row]
+                    cell.setUpCell(event: event, topic: topic, speaker: s, location: l)
+                }
+                else {
+                    cell.setUpCell(event: event, topic: topic, speaker: s, location: nil)
+                }
             }
             else {
-                cell.setUpCell(event: event, topic: nil, speaker: nil)
+                cell.setUpCell(event: event, topic: topic, speaker: nil, location: nil)
             }
         }
         else {
-            cell.setUpCell(event: event, topic: nil, speaker: nil)
+            cell.setUpCell(event: event, topic: nil, speaker: nil, location: nil)
         }
         
         return cell
@@ -70,6 +76,12 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                     if let speakers = event.fields.speakers {
                         for s in speakers {
                             self.loadSpeaker(id: s)
+                        }
+                    }
+                    if let locations = event.fields.location {
+                        for l in locations {
+                            print(l)
+                            self.loadLocation(id: l)
                         }
                     }
                 }
@@ -109,7 +121,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 DispatchQueue.main.async {
                     self.tableView?.reloadData()
                 }
-                print(self.speakers)
             }
             else {
                 print("Cannot retrieve speaker");
@@ -145,6 +156,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             controller.event = senderCell.event
             controller.topic = senderCell.topic
             controller.speaker = senderCell.speaker
+            controller.location = senderCell.location
         }
     }
 }

@@ -21,8 +21,8 @@ struct FieldsLocation: Codable {
     let photos: [LocationImage]?
 
     enum CodingKeys: String, CodingKey {
-        case space = "Space Name"
-        case building = "Building Location"
+        case space = "Space name"
+        case building = "Building location"
         case scheduled = "Scheduled events"
         case description = "Description"
         case photos = "Photo(s)"
@@ -45,6 +45,4 @@ struct LocationImage: Codable {
     let thumbnailssmallheight: Int?
     let thumbnailslargewidth: Int?
     let thumbnailslargeheight: Int?
-
-
 }
