@@ -12,6 +12,8 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
     var events : [Event] = [Event]();
     var topics : [Topic] = [Topic]();
     var speakers: [Speaker] = [Speaker]();
+    var locations: [Location] = [Location]();
+
     
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -111,6 +113,25 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             else {
                 print("Cannot retrieve speaker");
+        } }
+    }
+
+    func loadLocation(id: String){
+        let requestFactory = RequestFactory()
+        requestFactory.getLocation(id: id){ (errorHandle, location) in
+            if let _ = errorHandle.errorType, let errorMessage =
+             errorHandle.errorMessage {
+                print(errorMessage);
+            }
+            else if let location : Location = location {
+                self.locations.append(location);
+                DispatchQueue.main.async {
+                    self.tableView?.reloadData()
+                }
+                print(self.locations)
+            }
+            else {
+                print("Cannot retrieve location");
         } }
     }
     
