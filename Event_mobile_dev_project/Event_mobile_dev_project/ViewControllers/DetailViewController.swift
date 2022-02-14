@@ -65,13 +65,10 @@ class DetailViewController: UIViewController {
                 getData(from: url) { data, response, error in
                         guard let data = data, error == nil else { return }
                         print(response?.suggestedFilename ?? url.lastPathComponent)
-                        print("Download Finished")
-                        // always update the UI from the main thread
                         DispatchQueue.main.async() { [weak self] in
                             self?.locationImage.image = UIImage(data: data)
                         }
                 }
-                print(urlImage)
             }
         }
             self.topicLabel.textColor = UIColor.init(red: 0.820, green: 0.306, blue: 0.008, alpha: 1);
