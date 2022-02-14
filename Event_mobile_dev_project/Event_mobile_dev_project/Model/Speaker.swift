@@ -14,13 +14,13 @@ struct Speaker: Codable {
 
 struct Fields: Codable {
     let name: String?
-    let speaking: String?
+    let speaking: [String]?
     let role: String?
     let email: String?
-    let type: [String]?
-    let status: [String]?
+    let type: String?
+    let status: String?
     let company: [String]?
-    let phone: [String]?
+    let phone: String?
 
     
     enum CodingKeys: String, CodingKey {
