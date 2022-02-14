@@ -32,10 +32,16 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         let event = events[indexPath.row]
         if topics.count > indexPath.row {
             let topic = topics[indexPath.row]
-            cell.setUpCell(event: event, topic: topic)
+            if speakers.count > indexPath.row {
+                let s = speakers[indexPath.row]
+                cell.setUpCell(event: event, topic: topic, speaker: s)
+            }
+            else {
+                cell.setUpCell(event: event, topic: nil, speaker: nil)
+            }
         }
         else {
-            cell.setUpCell(event: event, topic: nil)
+            cell.setUpCell(event: event, topic: nil, speaker: nil)
         }
         
         return cell
@@ -59,7 +65,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.loadTopic(id: t)
                         }
                     }
-                    if let speakers = event.fields.name {
+                    if let speakers = event.fields.speakers {
                         for s in speakers {
                             self.loadSpeaker(id: s)
                         }
@@ -117,6 +123,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
            let controller: DetailViewController = segue.destination as? DetailViewController {
             controller.event = senderCell.event
             controller.topic = senderCell.topic
+            controller.speaker = senderCell.speaker
         }
     }
 }

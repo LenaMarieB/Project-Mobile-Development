@@ -18,6 +18,7 @@ class DetailViewController: UIViewController {
     
     var event : Event?
     var topic : Topic?
+    var speaker : Speaker?
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -43,9 +44,13 @@ class DetailViewController: UIViewController {
                     print("error while converting date")
                 }
             }
-            self.speakerLabel.text = event.fields.speakers?.first
             self.locationLabel.text = event.fields.location?.first
             self.notesLabel.text = event.fields.notes
+        }
+        if let speaker = speaker {
+            if let speakerName = speaker.fields.name {
+                self.speakerLabel.text = speakerName
+            }
         }
             self.topicLabel.textColor = UIColor.init(red: 0.820, green: 0.306, blue: 0.008, alpha: 1);
             self.titleLabel.textColor = UIColor.init(red: 0.749, green: 0.235, blue: 0.122, alpha: 1);

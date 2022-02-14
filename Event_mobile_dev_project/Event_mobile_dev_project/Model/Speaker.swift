@@ -9,10 +9,10 @@ import Foundation
 
 struct Speaker: Codable {
     let id: String
-    let fields: Fields
+    let fields: FieldsSpeaker
 }
 
-struct FieldSpeaker: Codable {
+struct FieldsSpeaker: Codable {
     let name: String?
     let speaking: [String]?
     let role: String?

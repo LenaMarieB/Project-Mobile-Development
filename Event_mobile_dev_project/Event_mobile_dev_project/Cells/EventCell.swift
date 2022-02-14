@@ -15,14 +15,14 @@ class EventCell : UITableViewCell {
     
     var event: Event?
     var topic: Topic?
-    //var speaker: Speaker?
+    var speaker: Speaker?
     //var location: Location?
         
-    func setUpCell(event: Event, topic: Topic?) {
+    func setUpCell(event: Event, topic: Topic?, speaker: Speaker?) {
         
         self.event = event
         self.topic = topic
-        //self.speaker = speaker
+        self.speaker = speaker
         //self.location = location
         
         self.eventLabel.text = event.fields.activity;
