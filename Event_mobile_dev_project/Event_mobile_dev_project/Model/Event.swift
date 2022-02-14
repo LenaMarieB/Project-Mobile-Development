@@ -87,6 +87,7 @@ enum CustomError: Error {
     case requestError
     case statusCodeError
     case parsingError
+    case convertDateError
 }
 
 // Request Factory
@@ -146,9 +147,4 @@ class RequestFactory: RequestFactoryProtocol {
             task.resume()
         }
 
-}
-
-func dateToString(iso: String) -> NSDate {
-    let formatter = DateFormatter()
-    return formatter.date(from: iso)! as NSDate
 }

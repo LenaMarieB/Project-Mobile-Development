@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class EventCell: UITableViewCell {
+class EventCell : UITableViewCell {
     @IBOutlet weak var eventLabel: UILabel!
     @IBOutlet weak var timeLabel: UILabel!
     @IBOutlet weak var typeLabel: UILabel!
@@ -20,8 +20,18 @@ class EventCell: UITableViewCell {
         self.event = event
         
         self.eventLabel.text = event.fields.activity;
-        /*self.timeLabel.text = NSCalendar.currentCalendar.component(.hour, from: dateToString(iso: event.fields.start!) as Date).toString();
-        self.typeLabel.text = StringToType(text: event.fields.topic?.first ?? default text: <#String#>).rawValue;*/
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss.SSSZ"
+        
+        if let date = event.fields.start {
+            if let d = formatter.date(from: date) {
+                self.timeLabel.text = String(NSCalendar.current.component(.hour, from: d as Date)) + "h" + String(NSCalendar.current.component(.minute, from: d as Date));
+            } else {
+                print("error while converting date")
+            }
+        }
+        //self.typeLabel.text = StringToType(text: event.fields.topic?.first).rawValue;
         
         self.eventLabel.textColor = UIColor.init(red: 0.749, green: 0.235, blue: 0.122, alpha: 1);
         self.timeLabel.textColor = UIColor.init(red: 1, green: 0.647, blue: 0, alpha: 1);
