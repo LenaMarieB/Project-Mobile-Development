@@ -31,7 +31,10 @@ class EventCell : UITableViewCell {
                 print("error while converting date")
             }
         }
-        //self.typeLabel.text = StringToType(text: event.fields.topic?.first).rawValue;
+        
+        if let topic = event.fields.topic {
+            self.typeLabel.text = StringToType(text: topic.first!).rawValue;
+        }
         
         self.eventLabel.textColor = UIColor.init(red: 0.749, green: 0.235, blue: 0.122, alpha: 1);
         self.timeLabel.textColor = UIColor.init(red: 1, green: 0.647, blue: 0, alpha: 1);

@@ -18,7 +18,6 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
         super.viewDidLoad();
         self.title = "Schedules";
         self.loadEvents();
-        print(self.events);
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -47,6 +46,7 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                 DispatchQueue.main.async {
                     self.tableView?.reloadData()
                 }
+                print(self.events)
             }
             else {
                 print("Not working");
