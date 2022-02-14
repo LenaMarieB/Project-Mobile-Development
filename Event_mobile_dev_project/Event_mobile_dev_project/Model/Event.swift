@@ -74,6 +74,11 @@ private let eventUrlStr =
 private let speakerUrlStr =
 "https://api.airtable.com/v0/appXKn0DvuHuLw4DV/Speakers%20%26%20attendees"
 
+private let locationUrlStr =
+"https://api.airtable.com/v0/appXKn0DvuHuLw4DV/Event%20locations"
+
+
+
 
 
 
@@ -148,5 +153,30 @@ class RequestFactory: RequestFactoryProtocol {
         }
             task.resume()
         }
+
+    func getLocation(id: String, callback: @escaping ((errorType: CustomError?,
+     errorMessage: String?), [Location]?) -> Void) {
+        let session = URLSession(configuration: .default)
+        let task = session.dataTask(with: createRequest(urlStr: locationUrlStr, requestType: .get, params: [id])) {(data, response, error) in if let data = data, error == nil {
+            if let responseHttp = response as? HTTPURLResponse {
+                if responseHttp.statusCode == 200 {
+                    if let response = try?
+                     JSONDecoder().decode(Location.self, from: data) {
+                        callback((nil, nil), response.records)
+        }
+        else {
+                        callback((CustomError.parsingError, "parsing error"), nil)
+        } }
+        else {
+                            callback((CustomError.statusCodeError, "status code : \(responseHttp.statusCode)"), nil)
+                        }
+        } }
+                else {
+                    callback((CustomError.requestError,
+                     error.debugDescription), nil)
+                }
+        }
+            task.resume()
+        }    
 
 }
