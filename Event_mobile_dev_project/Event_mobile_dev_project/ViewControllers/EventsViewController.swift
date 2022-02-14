@@ -11,6 +11,7 @@ import Foundation
 class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     var events : [Event] = [Event]();
     var topics : [Topic] = [Topic]();
+    var speakers: [Speaker] = [Speaker]();
     
     @IBOutlet weak var dayLabel: UILabel!
     @IBOutlet weak var tableView: UITableView!
@@ -58,6 +59,11 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
                             self.loadTopic(id: t)
                         }
                     }
+                    if let speakers = event.fields.name {
+                        for s in speakers {
+                            self.loadSpeaker(id: s)
+                        }
+                    }
                 }
             }
             else {
@@ -80,6 +86,25 @@ class EventsViewController: UIViewController, UITableViewDelegate, UITableViewDa
             }
             else {
                 print("Cannot retrieve topic");
+        } }
+    }
+
+    func loadSpeaker(id: String){
+        let requestFactory = RequestFactory()
+        requestFactory.getSpeaker(id: id){ (errorHandle, name) in
+            if let _ = errorHandle.errorType, let errorMessage =
+             errorHandle.errorMessage {
+                print(errorMessage);
+            }
+            else if let name : Speaker = name {
+                self.speakers.append(name);
+                DispatchQueue.main.async {
+                    self.tableView?.reloadData()
+                }
+                print(self.speakers)
+            }
+            else {
+                print("Cannot retrieve speaker");
         } }
     }
     
